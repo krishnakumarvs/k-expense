@@ -1,0 +1,9 @@
+.red-color {
+	color: red !important;
+}
+
+.add-button-center {
+	margin-left: auto !important;
+	margin-right: auto !important;
+	display: block;
+}

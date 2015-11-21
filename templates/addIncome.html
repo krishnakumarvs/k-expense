@@ -1,0 +1,22 @@
+<ion-view title="Add income">
+    <ion-content padding="'true'" class="has-header">
+        <form class="list">
+            <label class="item item-input">
+                <span class="input-label">Amount</span>
+                <input type="number" placeholder="0" ng-model="AddIncome.add_income.amount">
+            </label>
+            <label class="item item-select">
+                <span class="input-label" >From</span>
+                <select ng-model="AddIncome.add_income.from_name">
+                    <option>Salary</option>
+                    <option>Mom</option>
+                </select>
+            </label>
+            <label class="item item-input">
+                <span class="input-label">Date</span>
+                <input type="date" ng-model="AddIncome.add_income.created" placeholder="">
+            </label>
+        </form>
+        <a menu-close="" ng-click="AddIncome.addIncome()" href="#/page2/page6" class="button button-balanced button-clear button-large icon ion-android-add-circle add-button-center"></a>
+    </ion-content>
+</ion-view>
