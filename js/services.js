@@ -1,15 +1,21 @@
 angular.module('app.services', [])
 
-.factory('BlankFactory', [function(){
+.factory('BlankFactory', [
 
-}])
+    function() {
+
+    }
+])
 
 
-.service('BlankService', [function(){
+.service('BlankService', [
 
-}])
+    function() {
 
-.factory('HomeService',HomeService);
+    }
+])
+
+.factory('HomeService', HomeService);
 
 HomeService.$inject = ['$q', '$webSql'];
 
@@ -20,7 +26,9 @@ function HomeService($q, $webSql) {
     var HomeService = {
         createDataBase: createDataBase,
         addIncome: addIncome,
-        addOutcome: addOutcome
+        addOutcome: addOutcome,
+        getTotalIncome: getTotalIncome,
+        getTotalExpenditure: getTotalExpenditure
     };
     createDataBase();
     return HomeService;
@@ -111,10 +119,37 @@ function HomeService($q, $webSql) {
         return deferred.promise;
     }
 
-    function sample(student_id) {
+    function getTotalIncome() {
         var deferred = $q.defer();
-        deferred.resolve(response.data);
+        db.select(incomeTable, {
+            "amount": {
+                "value": 'IS NOT NULL'
+            }
+        }).then(function(results) {
+            var sum = 0;
+            for (i = 0; i < results.rows.length; i++) {
+                console.log(results.rows.item(i));
+                sum += results.rows.item(i).amount;
+            }
+            deferred.resolve(sum);
+        });
+        return deferred.promise;
+    }
+
+    function getTotalExpenditure() {
+        var deferred = $q.defer();
+        db.select(outcomeTable, {
+            "amount": {
+                "value": 'IS NOT NULL'
+            }
+        }).then(function(results) {
+            var sum = 0;
+            for (i = 0; i < results.rows.length; i++) {
+                console.log(results.rows.item(i));
+                sum += results.rows.item(i).amount;
+            }
+            deferred.resolve(sum);
+        });
         return deferred.promise;
     }
 }
-

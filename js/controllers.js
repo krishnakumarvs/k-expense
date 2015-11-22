@@ -4,10 +4,22 @@ angular.module('app.controllers', [])
 
 })
 
-.controller('homeCtrl', function() {
+.controller('homeCtrl', function($scope, HomeService) {
     var vm = this;
-    vm.balance = 12;
-    vm.expense = 10;
+    vm.income = 0;
+    vm.expense = 0;
+    vm.balance = 0;
+    getTotalIncomeAndOutcome();
+
+    function getTotalIncomeAndOutcome() {
+        HomeService.getTotalIncome().then(function(income) {
+            vm.income = income;
+            HomeService.getTotalExpenditure().then(function(expense) {
+                vm.expense = expense;
+                vm.balance = vm.income - vm.expense;
+            });
+        });
+    }
 })
 
 .controller('settingsCtrl', function($scope) {

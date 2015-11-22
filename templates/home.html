@@ -1,19 +1,23 @@
 <ion-view title="Home">
     <ion-content padding="'true'" class="has-header">
         <a menu-close="" href="#/page8" class="button button-assertive button-block button-large">Add Income</a>
-        <a menu-close="" href="#/page9" class="button button-balanced button-block button-large">Add outcome</a>
+        <a menu-close="" href="#/page9" class="button button-balanced button-block button-large">Add Expenditure</a>
         <a menu-close="" href="#/page11" class="button button-positive button-block button-large">View expences</a>
         <div class="list card">
             <div class="item item-divider">Account details</div>
             <div class="item item-body">
                 <form class="list">
                     <label class="item item-input">
-                        <span class="input-label">Balance</span>
-                        <input type="text" placeholder="0" ng-model="Home.balance">
+                        <span class="input-label">Income</span>
+                        <input type="text" placeholder="0" ng-model="Home.income" ng-disabled="true">
                     </label>
                     <label class="item item-input">
                         <span class="input-label">Spend this month</span>
-                        <input type="text" placeholder="0" ng-model="Home.expense">
+                        <input type="text" placeholder="0" ng-model="Home.expense" ng-disabled="true">
+                    </label>
+                    <label class="item item-input">
+                        <span class="input-label">Remaining</span>
+                        <input type="text" placeholder="0" ng-model="Home.balance" ng-disabled="true">
                     </label>
                 </form>
             </div>
