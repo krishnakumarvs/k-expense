@@ -7,3 +7,18 @@
 	margin-right: auto !important;
 	display: block;
 }
+
+.settings-add-button {
+	float: right;
+    padding: 0px 4px;
+    font-size: 25px;
+    cursor: pointer;
+}
+
+.settings-add-button.green {
+	color: green !important;
+}
+
+.settings-add-button.red {
+	color: red !important;
+}
