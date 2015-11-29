@@ -8,8 +8,7 @@
             <label class="item item-select">
                 <span class="input-label">To</span>
                 <select ng-model="AddOutcome.add_outcome.for_name">
-                    <option>Food</option>
-                    <option>Petrol</option>
+                    <option ng-repeat="outcomeSource in AddOutcome.outcomeSources">{{outcomeSource.source_name}}</option>
                 </select>
             </label>
             <label class="item item-input">
@@ -17,6 +16,6 @@
                 <input type="date" placeholder="" ng-model="AddOutcome.add_outcome.created">
             </label>
         </form>
-        <a menu-close="" ng-click="AddOutcome.addOutcome()" href="#/page2/page6" class="button button-balanced button-clear button-large icon ion-android-add-circle add-button-center"></a>
+        <a menu-close="" ng-click="AddOutcome.addOutcome()" class="button button-balanced button-clear button-large icon ion-android-add-circle add-button-center"></a>
     </ion-content>
 </ion-view>

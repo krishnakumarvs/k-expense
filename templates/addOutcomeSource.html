@@ -1,0 +1,19 @@
+<ion-view title="Add Outcome Source" ng-controller="outcomeSourceCtrl as Outcome">
+    <ion-content padding="'true'" class="has-header">
+        <form class="list">
+            <label class="item item-input">
+                <span class="input-label">Outcome Source</span>
+                <input type="text" ng-model="Outcome.outcomeSourceName" placeholder="Outcome Source">
+            </label>
+            <div class="align-center padding-top-5">
+                <a menu-close="" ng-click="Outcome.addOutcomeSource()" class="ion-android-add-circle font-size-40"></a>
+            </div>
+            </ion-item>            
+        </form>
+        <ion-list>
+            <ion-item menu-close="" ng-repeat="outcomeSource in Outcome.allOutcomeSources">{{outcomeSource.source_name}}
+            <button class="delete-button-income-source" ng-click="Outcome.deleteOutcomeSource(outcomeSource.id)">Delete</button>
+            </ion-item>
+        </ion-list>
+    </ion-content>
+</ion-view>

@@ -23,15 +23,69 @@ function HomeService($q, $webSql) {
     var db;
     var incomeTable = 'tbl_income';
     var outcomeTable = 'tbl_outcome';
+    var incomeSourceTable = 'tbl_income_src';
+    var outcomeSourceTable = 'tbl_outcome_src';
     var HomeService = {
         createDataBase: createDataBase,
         addIncome: addIncome,
         addOutcome: addOutcome,
         getTotalIncome: getTotalIncome,
-        getTotalExpenditure: getTotalExpenditure
+        getTotalExpenditure: getTotalExpenditure,
+        addIncomeSource: addIncomeSource,
+        getAllIncomeSource: getAllIncomeSource,
+        deleteIncomeSource: deleteIncomeSource,
+        addOutcomeSource: addOutcomeSource,
+        getAllOutcomeSource: getAllOutcomeSource,
+        deleteOutcomeSource: deleteOutcomeSource
     };
     createDataBase();
     return HomeService;
+
+    function deleteOutcomeSource(id) {
+        var deferred = $q.defer();
+        db.del(outcomeSourceTable, {
+            "id": id
+        });
+        deferred.resolve(true);
+        return deferred.promise;
+    }
+
+    function deleteIncomeSource(id) {
+        var deferred = $q.defer();
+        db.del(incomeSourceTable, {
+            "id": id
+        });
+        deferred.resolve(true);
+        return deferred.promise;
+    }
+
+    function addOutcomeSource(sourceName) {
+        var deferred = $q.defer();
+        db.insert(outcomeSourceTable, {
+            "source_name": sourceName,
+        }).then(function(results) {
+            if (results.insertId && results.insertId >= 0) {
+                deferred.resolve(true);
+            } else {
+                deferred.resolve(false);
+            }
+        });
+        return deferred.promise;
+    }
+
+    function addIncomeSource(sourceName) {
+        var deferred = $q.defer();
+        db.insert(incomeSourceTable, {
+            "source_name": sourceName,
+        }).then(function(results) {
+            if (results.insertId && results.insertId >= 0) {
+                deferred.resolve(true);
+            } else {
+                deferred.resolve(false);
+            }
+        });
+        return deferred.promise;
+    }
 
     function createDataBase() {
         db = $webSql.openDatabase('kManagerdb', '1.1', 'k-manager', 2 * 1024 * 1024);
@@ -85,6 +139,32 @@ function HomeService($q, $webSql) {
                 "null": "NOT NULL"
             }
         });
+
+        db.createTable(incomeSourceTable, {
+            "id": {
+                "type": "INTEGER",
+                "null": "NOT NULL", // default is "NULL" (if not defined)
+                "primary": true, // primary
+                "auto_increment": true // auto increment
+            },
+            "source_name": {
+                "type": "TEXT",
+                "null": "NOT NULL"
+            }
+        });
+
+        db.createTable(outcomeSourceTable, {
+            "id": {
+                "type": "INTEGER",
+                "null": "NOT NULL", // default is "NULL" (if not defined)
+                "primary": true, // primary
+                "auto_increment": true // auto increment
+            },
+            "source_name": {
+                "type": "TEXT",
+                "null": "NOT NULL"
+            }
+        });
     }
 
     function addIncome(amount, date, from_name) {
@@ -128,10 +208,41 @@ function HomeService($q, $webSql) {
         }).then(function(results) {
             var sum = 0;
             for (i = 0; i < results.rows.length; i++) {
-                console.log(results.rows.item(i));
                 sum += results.rows.item(i).amount;
             }
             deferred.resolve(sum);
+        });
+        return deferred.promise;
+    }
+
+    function getAllOutcomeSource() {
+        var deferred = $q.defer();
+        db.select(outcomeSourceTable, {
+            "source_name": {
+                "value": 'IS NOT NULL'
+            }
+        }).then(function(results) {
+            var outcomeSources = [];
+            for (i = 0; i < results.rows.length; i++) {
+                outcomeSources.push(results.rows.item(i));
+            }
+            deferred.resolve(outcomeSources);
+        });
+        return deferred.promise;
+    }
+
+    function getAllIncomeSource() {
+        var deferred = $q.defer();
+        db.select(incomeSourceTable, {
+            "source_name": {
+                "value": 'IS NOT NULL'
+            }
+        }).then(function(results) {
+            var incomeSources = [];
+            for (i = 0; i < results.rows.length; i++) {
+                incomeSources.push(results.rows.item(i));
+            }
+            deferred.resolve(incomeSources);
         });
         return deferred.promise;
     }
@@ -145,7 +256,6 @@ function HomeService($q, $webSql) {
         }).then(function(results) {
             var sum = 0;
             for (i = 0; i < results.rows.length; i++) {
-                console.log(results.rows.item(i));
                 sum += results.rows.item(i).amount;
             }
             deferred.resolve(sum);

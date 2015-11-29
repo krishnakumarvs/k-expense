@@ -8,8 +8,7 @@
             <label class="item item-select">
                 <span class="input-label" >From</span>
                 <select ng-model="AddIncome.add_income.from_name">
-                    <option>Salary</option>
-                    <option>Mom</option>
+                    <option ng-repeat="incomeSource in AddIncome.allIncomeSources ">{{incomeSource.source_name}}</option>
                 </select>
             </label>
             <label class="item item-input">
@@ -17,6 +16,6 @@
                 <input type="date" ng-model="AddIncome.add_income.created" placeholder="">
             </label>
         </form>
-        <a menu-close="" ng-click="AddIncome.addIncome()" href="#/page2/page6" class="button button-balanced button-clear button-large icon ion-android-add-circle add-button-center"></a>
+        <a menu-close="" ng-click="AddIncome.addIncome()" class="button button-balanced button-clear button-large icon ion-android-add-circle add-button-center"></a>
     </ion-content>
 </ion-view>

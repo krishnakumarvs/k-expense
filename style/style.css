@@ -34,3 +34,8 @@
 .font-size-40 {
 	font-size: 40px;
 }
+
+.delete-button-income-source {
+	float: right;
+    background-color: red;
+}

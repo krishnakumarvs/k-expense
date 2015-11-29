@@ -61,9 +61,14 @@ angular.module('app.routes', [])
       templateUrl: 'templates/addIncome.html',
       controller: 'addIncomeCtrl as AddIncome'
     })
-        
+
+
+    .state('addIncomeSource', {
+      url: '/page12',
+      templateUrl: 'templates/addIncomeSource.html',
+      controller: ''
+    })    
       
-    
       
         
     .state('addOutcome', {
@@ -71,9 +76,13 @@ angular.module('app.routes', [])
       templateUrl: 'templates/addOutcome.html',
       controller: 'addOutcomeCtrl as AddOutcome'
     })
-        
+
+    .state('addOutcomeSource', {
+      url: '/page13',
+      templateUrl: 'templates/addOutcomeSource.html',
+      controller: ''
+    })
       
-    
       
         
     .state('about', {

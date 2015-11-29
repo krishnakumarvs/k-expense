@@ -1,0 +1,19 @@
+<ion-view title="Add Income Source" ng-controller="incomeSourceCtrl as Income">
+    <ion-content padding="'true'" class="has-header">
+        <form class="list">
+            <label class="item item-input">
+                <span class="input-label">Income Source</span>
+                <input type="text" ng-model="Income.incomeSourceName" placeholder="Income Source">
+            </label>
+            <div class="align-center padding-top-5">
+                <a menu-close="" ng-click="Income.addIncomeSource()" class="ion-android-add-circle font-size-40"></a>
+            </div>
+            </ion-item>            
+        </form>
+        <ion-list>
+            <ion-item menu-close="" ng-repeat="incomeSource in Income.allIncomeSources">{{incomeSource.source_name}}
+            <button class="delete-button-income-source" ng-click="Income.deleteSource(incomeSource.id)">Delete</button>
+            </ion-item>
+        </ion-list>
+    </ion-content>
+</ion-view>
