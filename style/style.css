@@ -39,3 +39,7 @@
 	float: right;
     background-color: red;
 }
+
+.float-right {
+	float: right !important;
+}

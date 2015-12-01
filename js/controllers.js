@@ -216,6 +216,20 @@ angular.module('app.controllers', [])
 
 })
 
-.controller('expencesCtrl', function($scope) {
+.controller('expencesCtrl', function($scope, HomeService) {
+    var vm = this;
+    var defaultPreviousDays = 5;
+    vm.dateChange = dateChange;
+    vm.toDate = new Date();
+    vm.fromDate = new Date(vm.toDate.getTime());
+    vm.fromDate.setDate(vm.toDate.getDate() - defaultPreviousDays);
+    vm.expences = [];
+    dateChange();
 
+    function dateChange() {
+        HomeService.getExpencesBetweenDates(vm.fromDate.getTime(), vm.toDate.getTime()).then(function(response) {
+            console.log(response);
+            vm.expences = response;
+        });
+    }
 })

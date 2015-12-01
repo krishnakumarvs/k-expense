@@ -36,10 +36,33 @@ function HomeService($q, $webSql) {
         deleteIncomeSource: deleteIncomeSource,
         addOutcomeSource: addOutcomeSource,
         getAllOutcomeSource: getAllOutcomeSource,
-        deleteOutcomeSource: deleteOutcomeSource
+        deleteOutcomeSource: deleteOutcomeSource,
+        getExpencesBetweenDates: getExpencesBetweenDates
     };
     createDataBase();
     return HomeService;
+
+    function getExpencesBetweenDates(fromDate, toDate) {
+        var deferred = $q.defer();
+        db.select(outcomeTable, {
+            "created": {
+                "operator": '>=',
+                "value": fromDate
+            },
+            "created": {
+                "operator": '<=',
+                "value": toDate
+            }
+        }).then(function(results) {
+            expences = [];
+            for (i = 0; i < results.rows.length; i++) {
+                expences.push(results.rows.item(i));
+            }
+            deferred.resolve(expences);
+        });
+        return deferred.promise;
+
+    }
 
     function deleteOutcomeSource(id) {
         var deferred = $q.defer();

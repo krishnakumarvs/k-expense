@@ -98,7 +98,7 @@ angular.module('app.routes', [])
     .state('expences', {
       url: '/page11',
       templateUrl: 'templates/expences.html',
-      controller: 'expencesCtrl'
+      controller: 'expencesCtrl as Expence'
     })
         
       
